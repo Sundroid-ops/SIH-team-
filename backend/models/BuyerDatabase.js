@@ -47,4 +47,3 @@ const Buyer = mongoose.model('Buyers',InputSchema)
 module.exports = {
     Buyer
 }
-
