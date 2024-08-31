@@ -103,7 +103,7 @@ router.post('/signup' , async(req,res) => {
     }else{
         res.status(403).json({
             message: "Invalid input credentials .. please try again",
-            errors: ParsedInput.error.errors 
+            errors: ParsedInput.error.errors // Optional: Send validation errors for debugging
         });
     }
 });
