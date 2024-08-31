@@ -1,7 +1,7 @@
 const cloudinary = require('cloudinary').v2
 const { Product } = require('../models/productSchema')
 const express = require('express');
-
+const upload = require('../Middleware/multer')
 const productRouter = express.Router();
 
 const addProduct = async (req, res) => {
