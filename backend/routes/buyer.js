@@ -88,15 +88,6 @@ router.post('/login' , async (req, res) => {
                     message: "User not found. Please register first."
                 });
             }else{
-                if(ExistingUser.Cart == null){
-                    const cart = new Cart();
-                    cart.holder = ExistingUser;
-                    cart.save();
-                    ExistingUser.Cart = cart;
-                    await ExistingUser.save();
-                    console.log(cart);
-                    console.log(ExistingUser);
-                }
                 const IsCorrectPassword = await bcrypt.compare(ParsedInput.data.Password , ExistingUser.Password);
                 if(!IsCorrectPassword){
                     return res.status(401).json({

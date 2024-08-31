@@ -1,14 +1,19 @@
 const router = require("express").Router();
 const Cart = require("../models/Cart");
 const Product = require("../models/productSchema");
-const Buyer = require("../models/BuyerDatabase");
+const {Buyer} = require("../models/BuyerDatabase");
 
 const auth = require("../Middleware/Auth");
 
-router.post("/:cartID/add/:productID", async(req, res)=>{
+router.post("/add/:productID", async(req, res)=>{
     try{
-        const cart = await Cart.findOne({holder: req.user._id}).populate("orders")
-        console.log(cart);
+        const cart = await Cart.findOne({holder: "66d3810fb619018dd296b872"});
+        if(!cart){
+            const buyer = await Buyer.findById("66d3998b180f1ee9814bbd19");
+            const newCart = new Cart();
+            newCart.holder = buyer;
+            await newCart.save();
+        }
         const product = await Product.findById(req.params.productID);
         if(!product)
             return res.status(404).json({"msg": "product is missing"});
@@ -18,13 +23,13 @@ router.post("/:cartID/add/:productID", async(req, res)=>{
             if(product.qty >= order.qty + 1)
                 order.qty = order.qty+1;
         }
-        else{
-            const pushProduct = {
-                product: order,
-                qty: 1
-            };
-            cart.orders.push(pushProduct);
-        }
+        // else{
+        //     const pushProduct = {
+        //         product: order,
+        //         qty: 1
+        //     };
+        //     cart.orders.push(pushProduct);
+        // }
 
         await cart.save();
         await cart.populate("orders.product");
