@@ -1,0 +1,315 @@
+/* Container for the cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Space evenly between cards */
+    gap: 20px; /* Increased spacing between cards */
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px; /* Added padding for better spacing around the container */
+    box-sizing: border-box; /* Ensure padding doesn't affect width calculations */
+  }
+  
+  /* Adjusted spacing and new color for cards */
+  .card {
+    position: relative;
+    width: calc(25% - 20px); /* Ensure four cards per row with space in between */
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    cursor: pointer;
+  }
+  
+  /* Updated image styling to ensure proper fit */
+  .card-image {
+    width: 100%;
+    height: 100%; /* Updated to ensure image fills the card */
+    object-fit: cover; /* Ensures the image covers the card area */
+    transition: transform 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  /* Card overlay with adjusted spacing and transition */
+  .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.1px;
+    background: rgba(13, 109, 4, 0.9); 
+    color: white;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+  
+  /* Hover effect for overlay */
+  .card-overlay:hover {
+    background: rgb(223, 86, 32);
+  }
+  
+  /* Title styling */
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Price styling */
+  .card-price {
+    font-size: 1.2rem;
+    color: #27ae60;
+    margin-top: 10px;
+  }
+  
+  /* Hover effect for the card */
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Additional styles for better layout handling */
+  .card-content {
+    flex-grow: 1; /* Ensures content takes remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align overlay to the bottom */
+  }
+  
+  /* Adjust spacing in overlay */
+  .card-overlay p {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .card {
+      width: calc(33.333% - 20px); /* Adjust to three cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      width: calc(50% - 20px); /* Adjust to two cards per row */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      width: 100%; /* Stack cards on small screens */
+    }
+  }
+  
+  /* Search and filter styles */
+  .search-filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .filter-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Cart styles */
+  .cart-container {
+    position: fixed; /*Fixed positioning for top-right corner */
+    top: 0px; /* Distance from the top */
+    right: 0px; /* Distance from the right */
+    z-index: 1000;
+  }
+  
+  .cart-button {
+    background: none;
+    border: none;
+    font-size: 50px; /* Increased size */
+    color: #050215;
+    cursor: pointer;
+    position: relative; /* Relative positioning for dropdown alignment */
+  }
+  
+  .cart-button:hover {
+    color: #2b00ff; /* Highlight color on hover */
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  /* Cart dropdown styles */
+  .cart-dropdown {
+    position: absolute;
+    top: 60px; /* Position dropdown below the cart button */
+    right: 0; /* Align with the right edge of the cart button */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Adjust width as needed */
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .cart-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cart-item {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+  }
+  
+  .empty-cart {
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .buy-all-button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .buy-all-button:hover {
+    background: #219150;
+  }
+  
+  /* Dialog styles */
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .dialog-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .dialog-content h2 {
+    margin-bottom: 15px;
+    color: #27ae60; /* Color for the title */
+  }
+  
+  .dialog-content p {
+    margin: 10px 0;
+  }
+  
+  .dialog-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #27ae60;
+    color: white;
+  }
+  
+  .dialog-content button:hover {
+    background-color: #219150;
+  }
+  
+  .marketplace-background {
+    background-image: url('../assets/Farm3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-to-cart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-to-cart-button svg {
+    margin-right: 5px;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Heading container with animation */
+  .heading-container {
+    position: relative;
+    overflow: hidden; /* Hide content that overflows */
+    white-space: nowrap; /* Prevent text from wrapping */
+    width: 100%;
+  }
+  
+  /* Animation for heading */
+  .heading-slide {
+    display: inline-block; /* Required for animation */
+    animation: slide-left 10s linear infinite; /* Adjust duration for speed */
+    font-size: 2rem; /* Adjust size as needed */
+  }
+  
+  /* Keyframes for sliding effect */
+  @keyframes slide-left {
+    0% {
+      transform: translateX(100%); /* Start off-screen to the right */
+    }
+    100% {
+      transform: translateX(-100%); /* End off-screen to the left */
+    }
+  }
+  

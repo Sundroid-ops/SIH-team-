@@ -1,0 +1,63 @@
+/* Dashboard container styling */
+.dashboard-container {
+    height: 100vh;
+    width: 100%;
+    background-image: url('/assets/Farm2.jpg');
+    /*Updatethepathasperyourprojectstructure*/background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 2s ease-in-out;
+    -webkit-animation: fadeIn 2s ease-in-out;
+}
+  
+  /* Add fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Button animation (example) */
+  .dashboard-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 10px 20px;
+    margin: 20px;
+    font-size: 1.2em;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .dashboard-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+  }
+  
+  /* Animated background effect (optional) */
+  @keyframes moveBackground {
+    0% {
+      background-position: 0 0;
+    }
+  
+    50% {
+      background-position: 50px 50px;
+    }
+  
+    100% {
+      background-position: 0 0;
+    }
+  }
+  
+  .dashboard-container {
+    animation: moveBackground 15s linear infinite;
+  }
