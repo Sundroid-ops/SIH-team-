@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Footer from '../components/Footer'; 
-import RatingSection from '../components/RatingSection'; // Import the RatingSection component
+import RatingSection from '../components/RatingSection'; 
 import '../styles/BuyerDashboard.css';
 
 const BuyerDashboard = ({ userDetails }) => {
