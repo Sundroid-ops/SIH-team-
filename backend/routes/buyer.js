@@ -1,7 +1,8 @@
 const {Router} = require('express')
 require('dotenv').config()
 
-const {Buyer} = require("../database/BuyerDatabase.js");
+const {Buyer} = require("../models/BuyerDatabase.js");
+const Cart = require("../models/Cart.js");
 const JWT = require('jsonwebtoken')
 const zod = require('zod');
 const bcrypt = require('bcryptjs')
@@ -10,7 +11,6 @@ const router = Router();
 
 
 router.post('/signup'  ,async(req,res) => {
-
     const {BuisenessNumber , Password , EmailID , MobileNumber} = req.body
 
     const InputSchema = zod.object({
@@ -88,6 +88,15 @@ router.post('/login' , async (req, res) => {
                     message: "User not found. Please register first."
                 });
             }else{
+                if(ExistingUser.Cart == null){
+                    const cart = new Cart();
+                    cart.holder = ExistingUser;
+                    cart.save();
+                    ExistingUser.Cart = cart;
+                    await ExistingUser.save();
+                    console.log(cart);
+                    console.log(ExistingUser);
+                }
                 const IsCorrectPassword = await bcrypt.compare(ParsedInput.data.Password , ExistingUser.Password);
                 if(!IsCorrectPassword){
                     return res.status(401).json({

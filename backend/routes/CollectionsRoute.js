@@ -1,7 +1,7 @@
-import {v2 as cloudinary} from "cloudinary";
+//import {v2 as cloudinary} from "cloudinary";
 const Collection = require('../models/collectionModel')
 const express = require('express');
-const upload = require('../Middleware/multer')
+//const upload = require('../Middleware/multer')
 
 const collectionRouter = express.Router();
 
@@ -11,13 +11,13 @@ const addCollection = async(req, res) => {
         const name = req.body.name;
         const desc = req.body.desc;
         const imageFile = req.file;
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"});
+        //const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"});
 
 
         const collectionData = {
             name,
             desc,
-            image:imageUpload.secure_url
+            //image:imageUpload.secure_url
         }
         
         const collection = Collection(collectionData); 
@@ -44,7 +44,7 @@ const listCollection = async(req, res) => {
     }
 }
 
-collectionRouter.post('/add', upload.single('image'), addCollection);
+//collectionRouter.post('/add', upload.single('image'), addCollection);
 collectionRouter.get('/list', listCollection)
 
 module.exports = collectionRouter;
