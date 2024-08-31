@@ -1,0 +1,41 @@
+/* src/components/Sidebar.css */
+.sidebar {
+    background-color: #4caf50; /* Green for farming */
+    color: #fff;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  
+  .link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    color: #f1f8e9; /* Light green for text */
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .link:hover {
+    background: #388e3c; /* Darker green for hover effect */
+    transform: scale(1.05);
+  }
+  
+  .active-link {
+    background: #2e7d32; /* Even darker green for active link */
+    color: #f1f8e9;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  nav .space-y-4 > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+  
