@@ -4,14 +4,17 @@ const mongoConnect = require("./config/dbConfig");
 require("dotenv").config();
 
 //Import Routes
-const Hello = require("./routes/hello");
-const productRouter  = require('./routes/ProductRoute');
-const  collectionRouter  = require('./routes/CollectionsRoute');
+//const productRouter  = require('./routes/ProductRoute');
+const collectionRouter = require('./routes/CollectionsRoute');
+const Buyer = require("./routes/buyer");
+const Cart = require("./routes/cart");
 
+app.use(express.json());
 //Routes
-app.use("/hello", Hello);
-app.use("/api/product", productRouter)
+//app.use("/api/product", productRouter)
 app.use("/api/collection", collectionRouter)
+app.use("/api/buyer", Buyer)
+app.use("/api/cart", Cart)
 
 mongoConnect();
 const port = 4000

@@ -17,8 +17,9 @@ const productSchema = new mongoose.Schema({
     image:{
         type:String,
         required: true
-    }
+    },
+    qty: Number
 })
 
 
-module.exports = new mongoose.modle("Product", productSchema)
+module.exports = mongoose.model("Product", productSchema)

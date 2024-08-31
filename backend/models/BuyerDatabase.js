@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const MongoURL = process.env.URL
+const MongoURL = process.env.DB_URL
 const mongoose = require('mongoose');
 const { boolean } = require('zod');
 
@@ -35,6 +35,10 @@ const InputSchema = new mongoose.Schema({
     Password : {
         type : String,
         required : true
+    },
+    Cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cart"
     },
     isVerified : {
         type : Boolean,

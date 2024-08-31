@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose')
-const MongoURL = process.env.URL
+const MongoURL = process.env.DB_URL
 
 mongoose.connect(MongoURL)
 .catch(err => {
