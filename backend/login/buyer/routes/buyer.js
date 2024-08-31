@@ -7,7 +7,7 @@ const zod = require('zod');
 const bcrypt = require('bcryptjs')
 const jwtPass = process.env.JWT_CODE;
 const router = Router();
-const rateLimit = require('express-rate-limit')
+ 
 
 router.post('/signup'  ,async(req,res) => {
 
