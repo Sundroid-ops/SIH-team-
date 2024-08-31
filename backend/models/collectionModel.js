@@ -1,4 +1,4 @@
-import mongoose, { model }  from "mongoose";
+const {mongoose} = require("mongoose");
 
 const collectionSchema = new mongoose.Schema({
     name:{
@@ -15,4 +15,6 @@ const collectionSchema = new mongoose.Schema({
     }
 })
 
-export const Collection = mongoose.models.Collection || model("Collection", collectionSchema)
+// module.exports = new mongoose.model("Cart", cartSchema);
+
+module.exports = new mongoose.model("Collection", collectionSchema)
