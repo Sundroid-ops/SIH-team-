@@ -36,10 +36,6 @@ const InputSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    Cart: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Cart"
-    },
     isVerified : {
         type : Boolean,
         default : false
