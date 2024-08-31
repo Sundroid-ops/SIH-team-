@@ -6,7 +6,6 @@ const JWT = require('jsonwebtoken');
 const zod = require('zod');
 const bcrypt = require('bcryptjs')
 const jwtPass = process.env.JWT_CODE;
-const rateLimit = require('express-rate-limit')
 const router = Router();
 
 

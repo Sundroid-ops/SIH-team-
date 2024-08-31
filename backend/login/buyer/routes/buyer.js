@@ -1,7 +1,7 @@
 const {Router} = require('express')
 require('dotenv').config()
 
-const {Buyer} = require("../database");
+const {Buyer} = require("../../../models/database");
 const JWT = require('jsonwebtoken')
 const zod = require('zod');
 const bcrypt = require('bcryptjs')
