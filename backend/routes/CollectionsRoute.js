@@ -46,3 +46,5 @@ const listCollection = async(req, res) => {
 
 collectionRouter.post('/add', upload.single('image'), addCollection);
 collectionRouter.get('/list', listCollection)
+
+module.exports = collectionRouter;
