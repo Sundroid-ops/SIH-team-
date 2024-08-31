@@ -1,4 +1,4 @@
-import {v2 as cloudinary} from "cloudinary";
+const cloudinary = require('cloudinary').v2
 const Collection = require('../models/collectionModel')
 const express = require('express');
 const upload = require('../Middleware/multer')
@@ -11,7 +11,7 @@ const addCollection = async(req, res) => {
         const name = req.body.name;
         const desc = req.body.desc;
         const imageFile = req.file;
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"});
+        const imageUpload = await cloudinary.v2.uploader.upload(imageFile.path, {resource_type: "image"});
 
 
         const collectionData = {

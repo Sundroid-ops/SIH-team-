@@ -1,4 +1,4 @@
-import { v2 as cloudinary } from "cloudinary";
+const cloudinary = require('cloudinary').v2
 const { Product } = require('../models/productSchema')
 const express = require('express');
 
@@ -11,7 +11,7 @@ const addProduct = async (req, res) => {
         const collections = req.body.collections;
         const imageFile = req.files.image[0];
 
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" })
+        const imageUpload = await cloudinary.v2.uploader.upload(imageFile.path, { resource_type: "image" })
         const productData = {
             name,
             desc,
