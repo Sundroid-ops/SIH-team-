@@ -46,16 +46,21 @@ const Marketplace = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   // Assuming you have userDetails or user session management in place to get the buyerId
-  const userDetails = JSON.parse(localStorage.getItem('userDetails')); // Or use a different state management system
+  const userDetails = JSON.parse(localStorage.getItem('userDetails')); 
   const buyerId = userDetails?.id || 'buyer123'; // Replace with actual buyer ID from session or fallback
 
   // Update the handleNegotiate function to pass itemId, buyerId, and sellerId
   const handleNegotiate = (product) => {
     const itemId = product.id;
-    const sellerId = product.farmerName; // Adjust as needed
+    const sellerId = product.farmerName; // Replace with the correct seller ID
+    const buyerId = userDetails?.id || 'buyer123'; // Ensure buyerId is correct
   
-    console.log(`Navigating to chat with itemId: ${itemId}, buyerId: ${buyerId}, sellerId: ${sellerId}`);
-    navigate(`/chat/${itemId}/${buyerId}/${sellerId}`);
+    if (itemId && buyerId && sellerId) {
+      console.log(`Navigating to chat with itemId: ${itemId}, buyerId: ${buyerId}, sellerId: ${sellerId}`);
+      navigate(`/chat/${itemId}/${buyerId}/${sellerId}`);
+    } else {
+      console.error('Missing parameters for navigation:', { itemId, buyerId, sellerId });
+    }
   };
   
 

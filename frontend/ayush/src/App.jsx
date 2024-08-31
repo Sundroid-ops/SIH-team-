@@ -6,8 +6,7 @@ import SignUp from './pages/SignUp';
 import BuyerDashboard from './components/BuyerDashboard';
 import Marketplace from './components/Marketplace';
 import History from './components/History';
-// import Chat from './components/Chat'; // Import the Chat component
-
+ 
 const App = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -42,8 +41,8 @@ const App = () => {
         <Route path="/dashboard/marketplace" element={<ProtectedRoute element={<Marketplace />} />} />
         <Route path="/dashboard/history" element={<ProtectedRoute element={<History />} />} />
 
-        {/* Chat Route: Expects itemId, buyerId, and sellerId as URL parameters */}
-        {/* <Route path="/chat/:itemId/:buyerId/:sellerId" element={<ProtectedRoute element={<Chat />} />} /> */}
+        {/* Chat Route without IDs */}
+       
 
         {/* Default Route */}
         <Route path="/" element={<Navigate to={userDetails ? "/dashboard/marketplace" : "/signin"} />} />
