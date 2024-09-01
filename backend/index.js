@@ -25,7 +25,10 @@ app.use("/api/collection", collectionRouter)
 app.use("/api/buyer", Buyer)
 app.use("/api/cart", Cart)
 app.use("/api/upload", uploads)
-app.use("/api/stripe", uploads)
+app.use("/api/stripe", direct)
+
+mongoConnect();
+const port = 4000
 
 app.listen(port,()=>{
     console.log(`App is running on Port Number ${port}`);

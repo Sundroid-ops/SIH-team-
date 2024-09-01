@@ -66,7 +66,6 @@ router.post('/signup'  ,async(req,res) => {
 
 router.post('/login' , async (req, res) => {
     const { EmailID, Password } = req.body;
-
     const InputSchema = zod.object({
         EmailID: zod.string().email(),
         Password: zod.string()
@@ -95,7 +94,7 @@ router.post('/login' , async (req, res) => {
                     });
                 }else{
                     const token = JWT.sign({BuisenessNumber : ExistingUser.BuisenessNumber} , jwtPass)
-                    res.json(token);
+                    res.json({"token": token});
                 }
             }
         }catch(err){
