@@ -51,8 +51,7 @@ router.post('/signup'  ,async(req,res) => {
                 isVerified : false
             })
             try{
-                console.log(buyer);
-                const token = JWT.sign({"buyerId" : buyer._id},jwtPass)
+                const token = JWT.sign({"buyerID" : buyer._id},jwtPass)
                 res.json(token)
             }catch(error){
                 res.json({ message: "Failed to create JWT token", error: error.message })
@@ -94,7 +93,7 @@ router.post('/login' , async (req, res) => {
                         message: "Incorrect password. Please try again."
                     });
                 }else{
-                    const token = JWT.sign({"buyerId" : ExistingUser._id} , jwtPass)
+                    const token = JWT.sign({"buyerID" : ExistingUser._id} , jwtPass)
                     res.json({"token": token});
                 }
             }
