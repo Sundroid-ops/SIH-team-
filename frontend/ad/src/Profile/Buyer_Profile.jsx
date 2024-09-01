@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import ProfileIcon from '../assets/profile-icon.png';
 import { motion } from "framer-motion";
 import { FadeUp } from '../utility/animation';
-import Navbar from '../Components/Navbar/Navbar_farmer';
 import Footer from '../Components/Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
+import Navbar_buyer from '../Components/Navbar/Navbar_buyer';
 
 const Buyer_Profile = () => {
     const {BuyerID} = useParams();
@@ -27,7 +27,7 @@ const Buyer_Profile = () => {
 
   return (
     <section className='overflow-x-hidden'>
-      <Navbar />
+      <Navbar_buyer />
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <motion.div
           variants={FadeUp(0.7)}
