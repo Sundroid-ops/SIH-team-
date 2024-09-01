@@ -1,5 +1,4 @@
-const {Client, ID, Storage} = require("node-appwrite");
-const {InputFile} = require("node-appwrite/file")
+const {Client, ID, Storage, InputFile} = require("node-appwrite");
 
 const client = new Client()
     .setEndpoint(process.env.appwrite_endpoint)
