@@ -14,11 +14,13 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     image:{
-        type:String,
-        required: true
+        type:String
     },
-    qty: Number
+    qty: Number,
+    farmer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Farmer"
+    }
 })
 
 module.exports = new mongoose.model("Product", productSchema)
-module.exports = mongoose.model("Product", productSchema)

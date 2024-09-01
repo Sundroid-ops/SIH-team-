@@ -1,7 +1,6 @@
 const cloudinary = require('cloudinary').v2
-const { Product } = require('../models/productSchema')
+const Product = require('../models/productSchema')
 const express = require('express');
-const upload = require('../Middleware/multer')
 const upload = require("../Middleware/multer");
 const productRouter = express.Router();
 
@@ -10,22 +9,28 @@ const addProduct = async (req, res) => {
         const name = req.body.name;
         const desc = req.body.desc;
         const collections = req.body.collections;
-        const imageFile = req.files.image[0];
+        //const imageFile = req.files.image[0];
 
-        const imageUpload = await cloudinary.v2.uploader.upload(imageFile.path, { resource_type: "image" })
+        //const imageUpload = await cloudinary.v2.uploader.upload(imageFile.path, { resource_type: "image" })
         const productData = {
             name,
             desc,
-            collections,
-            image: imageUpload.secure_url
+            collections
+            //image: imageUpload.secure_url
         }
 
-        const product = Product(productData);
+        const product = new Product();
+        product.name = name;
+        product.desc = desc;
+        product.collections = collections;
+        product.qty = req.body.qty;
+        console.log(product);
         await product.save();
 
-        res.json({ success: true, message: "Product added " })
+        res.json({ success: true, product: product })
     } catch (error) {
-        res.json({success:false})
+        console.log(error);
+        res.json({error:false})
     }
 }
 

@@ -17,7 +17,7 @@ const addCollection = async(req, res) => {
         const collectionData = {
             name,
             desc,
-            //image:imageUpload.secure_url
+            image:imageUpload.secure_url
         }
         
         const collection = Collection(collectionData); 
@@ -44,7 +44,7 @@ const listCollection = async(req, res) => {
     }
 }
 
-//collectionRouter.post('/add', upload.single('image'), addCollection);
+collectionRouter.post('/add', upload.single('image'), addCollection);
 collectionRouter.get('/list', listCollection)
 
 module.exports = collectionRouter;

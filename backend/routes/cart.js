@@ -2,14 +2,16 @@ const router = require("express").Router();
 const Cart = require("../models/Cart");
 const Product = require("../models/productSchema");
 const {Buyer} = require("../models/BuyerDatabase");
+const ChatDB = require("../models/chat");
 
 const auth = require("../Middleware/Auth");
 
-router.post("/add/:productID", async(req, res)=>{
+router.post("/add/:productID", auth, async(req, res)=>{
     try{
-        const cart = await Cart.findOne({holder: "66d3810fb619018dd296b872"});
+        console.log(req.user);
+        const cart = await Cart.findOne({holder: req.user});
         if(!cart){
-            const buyer = await Buyer.findById("66d3998b180f1ee9814bbd19");
+            const buyer = await Buyer.findById(req.user._id);
             const newCart = new Cart();
             newCart.holder = buyer;
             await newCart.save();
@@ -23,13 +25,13 @@ router.post("/add/:productID", async(req, res)=>{
             if(product.qty >= order.qty + 1)
                 order.qty = order.qty+1;
         }
-        // else{
-        //     const pushProduct = {
-        //         product: order,
-        //         qty: 1
-        //     };
-        //     cart.orders.push(pushProduct);
-        // }
+        else{
+            const pushProduct = {
+                product: order,
+                qty: 1
+            };
+            cart.orders.push(pushProduct);
+        }
 
         await cart.save();
         await cart.populate("orders.product");
@@ -80,5 +82,25 @@ router.get("/:cartID", async(req, res)=>{
         res.status(500).json({"msg": err.message});
     }
 });
+
+router.post("/:cartID/proceed", async(req, res)=>{
+    try {
+        const cart = await Cart.findById(req.params.cartID);
+        for(const order of cart.orders){
+            const findChat = await ChatDB.findOne({farmer: order.farmer._id, buyer: cart.buyer._id});
+
+            if(!findChat){
+                const createChat = new ChatDB();
+                createChat.buyer = cart.holder._id;
+                createChat.farmer = order.farmer._id;
+            }
+        }
+
+        res.status(200).json({"msg": "please connect with your farmers"});
+    } catch (error) {
+        console.log(err.message);
+        res.status(500).json({"msg": err.message});
+    }
+})
 
 module.exports = router;
