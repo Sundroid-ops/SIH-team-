@@ -42,7 +42,7 @@ router.post('/signup', async (req, res) => {
                 message: "User already Registered ... please proceed to login page"
             });
         } else {
-            await Farmer.create({
+            const farmer = await Farmer.create({
                 MobileNumber: ParsedInput.data.MobileNumber,
                 Password: HashedPassword,
                 Name: ParsedInput.data.Name,
@@ -52,7 +52,7 @@ router.post('/signup', async (req, res) => {
             })
 
             try {
-                const token = JWT.sign({ MobileNumber: ParsedInput.data.MobileNumber }, jwtPass)
+                const token = JWT.sign({ FarmedID : farmer._id}, jwtPass)
                 res.json(token)
             } catch (error) {
                 res.json({ message: "Failed to create JWT token", error: error.message })
@@ -93,7 +93,7 @@ router.post('/login', async (req, res) => {
                         message: "Incorrect password. Please try again."
                     });
                 } else {
-                    const token = JWT.sign({ MobileNumber: ExistingUser.MobileNumber }, jwtPass)
+                    const token = JWT.sign({ MobileNumber: ExistingUser._id }, jwtPass)
                     res.json(token);
                 }
             }
