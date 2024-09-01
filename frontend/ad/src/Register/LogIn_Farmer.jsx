@@ -27,12 +27,12 @@ const LogIn_Farmer = () => {
       animate="visible"
       className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Login (as Farmer)</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">LogIn (as Farmer)</h2>
         
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-              Phone Nummber
+              Phone Number
             </label>
             <input
               type="tel"
