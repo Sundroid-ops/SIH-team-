@@ -1,13 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileIcon from '../assets/profile-icon.png';
 import { motion } from "framer-motion";
 import { FadeUp } from '../utility/animation';
 import Navbar from '../Components/Navbar/Navbar_farmer';
 import Footer from '../Components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Farmer_Profile = () => {
+  const [farmerData , setFarmerData] = useState(null);
+  const [error , setError] = useState('');
+  const {MobileNumber} = useParams();
+
+  useEffect(() => {
+    const fetchedFarmerData = async () => {
+      try{
+        const response = await axios.get(`/api/farmer/${MobileNumber}`)
+        setFarmerData(response.data)
+      }catch(err){
+        setError('Error fetching farmer data')
+      }
+    };
+    fetchedFarmerData();
+  } , [MobileNumber]);
+
   return (
     <section className='overflow-x-hidden'>
       <Navbar />

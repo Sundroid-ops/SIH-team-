@@ -1,12 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileIcon from '../assets/profile-icon.png';
 import { motion } from "framer-motion";
 import { FadeUp } from '../utility/animation';
 import Navbar from '../Components/Navbar/Navbar_farmer';
 import Footer from '../Components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
 const Buyer_Profile = () => {
+    const {BuyerID} = useParams();
+    const [buyerData , setBuyerData] = useState(null);
+    const [error , setError] = useState('');
+
+    useEffect(() => {
+      const fetchBuyerData = async () => {
+        try {
+          const response = await axios.get(`/api/buyer/${BuyerID}`); // Use buyerID from URL
+          setBuyerData(response.data);
+        } catch (error) {
+          setError('Error fetching buyer data');
+        }
+      }
+      fetchBuyerData();
+    },[BuyerID]); 
+
   return (
     <section className='overflow-x-hidden'>
       <Navbar />
