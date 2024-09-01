@@ -109,5 +109,19 @@ router.post('/login' , async (req, res) => {
     }
 });
 
+router.get('/buyer/:BuyerID' , async(req,res) => {
+    try{
+
+        const currentBuyer = await Buyer.findOne({BuyerID : req.params.BuyerID});
+        if(!currentBuyer){
+            return res.status(404).json({ message: 'Buyer not found' });
+        }else{
+            res.json(currentBuyer);
+        }
+    }catch(error){
+        res.status(500).json({ message: 'Server Error'  , error : error.message});
+    }
+});
+
 
 module.exports = router;
