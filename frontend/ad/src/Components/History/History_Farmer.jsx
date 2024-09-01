@@ -7,8 +7,10 @@ const History_Farmer = () => {
   return (
     <section className='overflow-x-hidden'>
       <Navbar_farmer/>
-      <div className='container'>
-        History of Farmer add the page, after adding content footer will go down
+      <div className='container h-screen'>
+        <h1 className='text-5xl pb-10 font-bold'>Transaction History</h1>
+        <p>You have not made any transaction</p>
+
       </div>
       <Footer/>
     </section>

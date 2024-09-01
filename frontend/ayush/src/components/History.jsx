@@ -42,7 +42,6 @@ const History = () => {
 
   return (
     <div className="flex bg-gray-50">
-      <Sidebar />
       <div className="flex-1 p-8 min-h-screen ml-64">
         <h1 className="text-4xl font-bold text-indigo-600 mb-8">Transaction History</h1>
         

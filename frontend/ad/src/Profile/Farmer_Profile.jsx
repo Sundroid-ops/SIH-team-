@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { FadeUp } from '../utility/animation';
 import Navbar from '../Components/Navbar/Navbar_farmer';
 import Footer from '../Components/Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Farmer_Profile = () => {
