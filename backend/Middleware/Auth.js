@@ -8,7 +8,7 @@ const jwtMiddleware = (req,res,next) => {
     }
     try{
         const decoded = JWT.verify(token,jwtPass);
-        req.user = decoded;
+        req.userID = decoded.buyerId;
         next();
     }catch(err){
         res.status(403).json({message: 'Invalid token' , error : err.message})
