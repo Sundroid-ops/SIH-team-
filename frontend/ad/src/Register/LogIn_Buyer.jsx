@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { FadeUp } from '../utility/animation';
 
 const LogIn_Buyer = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -13,11 +16,44 @@ const LogIn_Buyer = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add form submission logic here
-    console.log(formData);
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Password validation function
+  const validatePassword = (password) => {
+    return {
+      length: password.length >= 8, // Minimum 8 characters
+      uppercase: /[A-Z]/.test(password), // At least one uppercase letter
+      lowercase: /[a-z]/.test(password), // At least one lowercase letter
+      specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password), // At least one special character
+      number: /\d/.test(password), // At least one number
+    };
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let errors = {};
+
+    // Validate email
+    if (!emailRegex.test(email)) {
+      errors.email = 'Please enter a valid email address.';
+    }
+
+    // Validate password
+    const passwordCriteria = validatePassword(password);
+    if (!Object.values(passwordCriteria).every(Boolean)) {
+      errors.password = 'Password must meet all criteria.';
+    }
+
+    setErrors(errors);
+
+    // If no errors, proceed with login logic
+    if (Object.keys(errors).length === 0) {
+      console.log('Logging in...');
+      // Implement your login logic here
+    }
+  };
+
 
   return (
     <motion.div
@@ -35,11 +71,11 @@ const LogIn_Buyer = () => {
             </label>
             <input
               type="email"
-              name="businessNo"
+              name="email"
               value={formData.email}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-              placeholder="Enter your Business No"
+              placeholder="Enter your Email"
             />
           </div>
 
@@ -55,6 +91,26 @@ const LogIn_Buyer = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               placeholder="Enter your password"
             />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            )}
+            <div className="text-sm mt-2">
+              <p className={`text-${password.length >= 8 ? 'green' : 'red'}-500`}>
+                • At least 8 characters
+              </p>
+              <p className={`text-${/[A-Z]/.test(password) ? 'green' : 'red'}-500`}>
+                • At least one uppercase letter
+              </p>
+              <p className={`text-${/[a-z]/.test(password) ? 'green' : 'red'}-500`}>
+                • At least one lowercase letter
+              </p>
+              <p className={`text-${/[!@#$%^&*(),.?":{}|<>]/.test(password) ? 'green' : 'red'}-500`}>
+                • At least one special character
+              </p>
+              <p className={`text-${/\d/.test(password) ? 'green' : 'red'}-500`}>
+                • At least one number
+              </p>
+            </div>
           </div>
 
           <button
