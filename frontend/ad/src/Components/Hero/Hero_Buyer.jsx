@@ -10,6 +10,7 @@ import Banner2 from '../Banner_Buyer/Banner2';
 import NegociationChat_Sec from '../Banner_Buyer/NegociationChat_Sec';
 import Footer from '../Footer/Footer';
 import Navbar_buyer from '../Navbar/Navbar_buyer';
+import Display from '../Menus/Display';
 
 const Hero_Buyer = () => {
     return (
@@ -75,7 +76,7 @@ const Hero_Buyer = () => {
             </div>
 
             {/* Menu Section */}
-            <Menus_Buyer />
+            <Display />
 
             {/* App Banner */}
             <Banner />
