@@ -1,7 +1,7 @@
 const {mongoose} = require("mongoose");
 const Product = require("./productSchema");
 
-const uploadSchema = new mongoose.Schema({
+const chatSchema = new mongoose.Schema({
     buyer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Buyer"
@@ -17,4 +17,4 @@ const uploadSchema = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model("Upload", uploadSchema);
+module.exports = mongoose.model("Chat", chatSchema);

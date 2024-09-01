@@ -1,4 +1,4 @@
-import {v2 as cloudinary} from "cloudinary";
+const cloudinary = require('cloudinary').v2
 const Collection = require('../models/collectionModel')
 const express = require('express');
 const upload = require('../Middleware/multer')

@@ -8,7 +8,8 @@ require("dotenv").config();
 //const collectionRouter = require('./routes/CollectionsRoute');
 const Buyer = require("./routes/buyer");
 const Cart = require("./routes/cart");
-const uploads = require("./routes/uploads")
+const uploads = require("./routes/uploads");
+const direct = require("./routes/payments/direct");
 
 app.use(express.json());
 //Routes
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/buyer", Buyer)
 app.use("/api/cart", Cart)
 app.use("/api/upload", uploads)
+app.use("/api/stripe", uploads)
 
 mongoConnect();
 const port = 4000
