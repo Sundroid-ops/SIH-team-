@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoConnect = require("./config/dbConfig");
+const connectCloudinary = require("./config/cloudinary")
 require("dotenv").config();
 
 //Import Routes
@@ -11,7 +12,13 @@ const Cart = require("./routes/cart");
 const uploads = require("./routes/uploads");
 const direct = require("./routes/payments/direct");
 
-app.use(express.json());
+
+mongoConnect();
+const port = 4000
+connectCloudinary();
+
+app.use(express.json())
+
 //Routes
 app.use("/api/product", productRouter)
 app.use("/api/collection", collectionRouter)
