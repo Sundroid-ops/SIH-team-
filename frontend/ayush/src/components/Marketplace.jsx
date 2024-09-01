@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { useParams } from 'react-router-dom'
+import { DataContext } from "../context/DataContext";
 import '../styles/Marketplace.css';
 import AnimatedCard from './AnimatedCard';
 import backgroundImage from '../assets/Farm4.jpg';
@@ -12,15 +14,17 @@ import Tomato from '../assets/Tomato.jpg';
 import Apple from '../assets/Apple.jpg';
 import Grapes from '../assets/Grapes.jpg';
 
-const Marketplace = () => {
-  const products = [
-    { id: 1, name: 'Wheat', price: 100, image: Wheat, quality: 'High', quantity: 50, farmerName: 'Verma', contactInfo: '123-456-7890', category: 'Grain' },
-    { id: 2, name: 'Rice', price: 150, image: Rice, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Grain' },
-    { id: 3, name: 'Tomato', price: 150, image: Tomato, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Vegetable' },
-    { id: 4, name: 'Apple', price: 150, image: Apple, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Fruit' },
-    { id: 5, name: 'Grapes', price: 150, image: Grapes, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Fruit' },
-  ];
-
+const Marketplace = ({collection}) => {
+  // const products = [
+  //   { id: 1, name: 'Wheat', price: 100, image: Wheat, quality: 'High', quantity: 50, farmerName: 'Verma', contactInfo: '123-456-7890', category: 'Grain' },
+  //   { id: 2, name: 'Rice', price: 150, image: Rice, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Grain' },
+  //   { id: 3, name: 'Tomato', price: 150, image: Tomato, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Vegetable' },
+  //   { id: 4, name: 'Apple', price: 150, image: Apple, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Fruit' },
+  //   { id: 5, name: 'Grapes', price: 150, image: Grapes, quality: 'Medium', quantity: 30, farmerName: 'Smith', contactInfo: '987-654-3210', category: 'Fruit' },
+  // ];
+  const {id} = useParams();
+  const [collectionData, setcollectionData] = useState("")
+  const {CollectionData, productData} = useContext(DataContext)
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [cart, setCart] = useState(() => {
@@ -31,9 +35,9 @@ const Marketplace = () => {
   const [showCart, setShowCart] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const filteredProducts = products
+  const filteredProducts = productData
     .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter((product) => (filterCategory ? product.category === filterCategory : true));
+    // .filter((product) => (filterCategory ? product.collections === filterCategory : true));
 
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
@@ -80,6 +84,14 @@ const Marketplace = () => {
   const cartRef = useRef();
 
   useEffect(() => {
+    CollectionData.map((item) => {
+        if(item._id === id){
+            setcollectionData(item)
+        }
+    })
+},[])
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (dialogRef.current && !dialogRef.current.contains(event.target) && cartRef.current && !cartRef.current.contains(event.target)) {
         setShowCart(false);
@@ -113,7 +125,7 @@ const Marketplace = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
-          <select
+          {/* <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
             className="filter-select"
@@ -123,7 +135,7 @@ const Marketplace = () => {
             <option value="Grain">Grain</option>
             <option value="Fruit">Fruit</option>
             <option value="Vegetable">Vegetable</option>
-          </select>
+          </select> */}
           <button onClick={toggleCart} className="cart-button" ref={cartRef}>
             <FaShoppingCart />
             {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
@@ -131,7 +143,7 @@ const Marketplace = () => {
         </div>
 
         <div className="card-container">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product) => product.collections === collection.name).map((product) => (
             <AnimatedCard key={product.id} product={product} openDialog={openDialog} />
           ))}
         </div>
@@ -177,7 +189,7 @@ const Marketplace = () => {
                 <strong>Price:</strong> ₹{selectedProduct.price}
               </p>
               <p>
-                <strong>Category:</strong> {selectedProduct.category}
+                <strong>Category:</strong> {selectedProduct.collections}
               </p>
               <p>
                 <strong>Farmer Name:</strong> {selectedProduct.farmerName}
