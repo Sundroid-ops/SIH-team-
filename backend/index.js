@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoConnect = require("./config/dbConfig");
-require("dotenv").config();
+require('dotenv').config();
 
 //Import Routes
 //const productRouter  = require('./routes/ProductRoute');

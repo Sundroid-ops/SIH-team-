@@ -109,7 +109,7 @@ router.post('/login' , async (req, res) => {
     }
 });
 
-router.get('/buyer/:BuyerID' , async(req,res) => {
+router.get('getBuyer/:BuyerID' , async(req,res) => {
     try{
 
         const currentBuyer = await Buyer.findOne({BuyerID : req.params.BuyerID});

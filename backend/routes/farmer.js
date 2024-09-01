@@ -108,7 +108,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/farmer/:MobileNumber' , async(req,res) => {
+router.get('getFarmer/:MobileNumber' , async(req,res) => {
     try{
         const currentFarmer = await Farmer.findOne({MobileNumber : req.params.MobileNumber})
         if(!currentFarmer){
