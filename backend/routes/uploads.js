@@ -7,10 +7,23 @@ const upload = multer({ storage: storage });
 const Chat = require("../models/chat")
 const { appStore, ID, InputFile } = require("../config/appwriteConfig")
 
+const { exiftool } = require('exiftool-vendored');
+
+const exif =  async (filePath) => {
+    try {
+        const metadata = await exiftool.read(filePath);
+        console.log(metadata);
+    } catch (err) {
+        console.error('Error extracting EXIF data:', err);
+    }
+}
+
 router.post("/:chatID", upload.single("image"), async(req, res)=>{
     try {
-        console.log(ID);
         let chat = await Chat.findById(req.params.chatID);
+        console.log(req.file.path);
+        await exif(req.file.path)
+        return res.send("gggg");
         const file = await appStore.createFile(
             process.env.appwrite_BUCKET_ID,
             ID.unique(),

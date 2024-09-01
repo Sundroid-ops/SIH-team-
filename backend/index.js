@@ -12,9 +12,6 @@ const Cart = require("./routes/cart");
 const uploads = require("./routes/uploads");
 const direct = require("./routes/payments/direct");
 
-
-mongoConnect();
-const port = 4000
 connectCloudinary();
 
 app.use(express.json())
