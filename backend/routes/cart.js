@@ -8,10 +8,10 @@ const auth = require("../Middleware/Auth");
 
 router.post("/add/:productID", auth, async(req, res)=>{
     try{
-        console.log(req.user);
-        const cart = await Cart.findOne({holder: req.user});
+        const cart = await Cart.findOne({holder: req.userID});
+        console.log(cart);
         if(!cart){
-            const buyer = await Buyer.findById(req.user._id);
+            const buyer = await Buyer.findById(req.userID);
             const newCart = new Cart();
             newCart.holder = buyer;
             await newCart.save();

@@ -42,7 +42,7 @@ router.post('/signup'  ,async(req,res) => {
                 message: "User already Registered ... please proceed to login page"
             });
         }else{
-            await Buyer.create({
+            const buyer = await Buyer.create({
                 BuyerID : BuyerID,
                 BuisenessNumber : HashedBuisenessNumber,
                 Password : HashedPassword,
@@ -51,7 +51,8 @@ router.post('/signup'  ,async(req,res) => {
                 isVerified : false
             })
             try{
-                const token = JWT.sign({BuisenessNumber : ParsedInput.data.BuisenessNumber},jwtPass)
+                console.log(buyer);
+                const token = JWT.sign({"buyerId" : buyer._id},jwtPass)
                 res.json(token)
             }catch(error){
                 res.json({ message: "Failed to create JWT token", error: error.message })
@@ -93,7 +94,7 @@ router.post('/login' , async (req, res) => {
                         message: "Incorrect password. Please try again."
                     });
                 }else{
-                    const token = JWT.sign({BuisenessNumber : ExistingUser.BuisenessNumber} , jwtPass)
+                    const token = JWT.sign({"buyerId" : ExistingUser._id} , jwtPass)
                     res.json({"token": token});
                 }
             }
