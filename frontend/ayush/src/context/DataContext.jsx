@@ -46,3 +46,5 @@ const DataContextProvider = (props) => {
         </DataContext.Provider>
       )
 }
+
+export default DataContextProvider;
